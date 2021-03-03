@@ -1,19 +1,17 @@
 <template>
-  <q-page class="flex flex-center">
-   <!-- <q-card class="my-card">
-      <q-img :src="fotoGato">
-        <div class="absolute-bottom">
-          <div class="text-subtitle2" v-for="texto in urlGatoRandom" :key="texto">{{texto.text}}</div>
-        </div>
-      </q-img>
+  <div class="q-pa-md row items-start q-gutter-md">
+   <q-card class="my-card" v-for="(texto) in info" :key="texto">
+        <q-card-section class="q-pt-none">
+          {{texto.text}}
+        </q-card-section>
 
-      <q-card-actions>
+      <q-card-actions class="bg-purple text-white">
         <q-btn flat>Guardar</q-btn>
       </q-card-actions>
     </q-card>
-    img alt="Quasar logo" :src="fotoGato" width="300px">-->
-    <p v-for="(texto, i) in facts" :key="texto">{{i+1}} - {{texto.text}}</p>
-  </q-page>
+     <!--<img alt="Quasar logo" :src="fotoGato" width="300px">
+   <div v-for="(texto, i) in info" :key="texto"></div>-->
+  </div>
 </template>
 <script>
 import { api } from 'boot/axios'
@@ -22,7 +20,7 @@ export default {
   data: function () {
     return {
       fotoGato: require('../assets/634.jpg'),
-      facts: []
+      info: []
     }
   },
   mounted: function () {
@@ -32,7 +30,7 @@ export default {
     getCatFact: function () {
       api.get('/facts')
         .then((response) => {
-          this.facts = response.data
+          this.info = response.data
         })
     }
   }
