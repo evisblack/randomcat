@@ -1,16 +1,12 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-   <q-card class="my-card" v-for="(texto) in info" :key="texto">
-        <q-card-section class="q-pt-none">
+   <q-card class="my-card" v-for="(texto, indice) in info" :key="texto">
+        <q-card-section class="q-pt-none" v-if="indice == contador">
           {{texto.text}}
         </q-card-section>
-
-      <q-card-actions class="bg-purple text-white">
-        <q-btn flat>Guardar</q-btn>
-      </q-card-actions>
-    </q-card>
-     <!--<img alt="Quasar logo" :src="fotoGato" width="300px">
-   <div v-for="(texto, i) in info" :key="texto"></div>-->
+   </q-card>
+   <q-btn push color="primary" label="Nuevo" icon="autorenew" @click="sumaContador()"/>
+   <q-btn push color="white" text-color="primary" label="guardar" icon="get_app" @click="sumaContador()"/>
   </div>
 </template>
 <script>
@@ -20,7 +16,8 @@ export default {
   data: function () {
     return {
       fotoGato: require('../assets/634.jpg'),
-      info: []
+      info: [],
+      contador: 0
     }
   },
   mounted: function () {
@@ -32,6 +29,13 @@ export default {
         .then((response) => {
           this.info = response.data
         })
+    },
+    sumaContador: function () {
+      if (this.contador < (this.info.length - 1)) {
+        this.contador++
+      } else {
+        this.contador = 0
+      }
     }
   }
 }
