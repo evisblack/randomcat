@@ -1,12 +1,13 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
    <q-card class="my-card" v-for="(texto, indice) in info" :key="texto">
-        <q-card-section class="q-pt-none" v-if="indice == contador">
+        <q-card-section class="q-pt-none" v-if="indice == contador" v-model="fact" >
           {{texto.text}}
         </q-card-section>
    </q-card>
+   <p>{{fact}}</p>
    <q-btn push color="primary" label="Nuevo" icon="autorenew" @click="sumaContador()"/>
-   <q-btn push color="white" text-color="primary" label="guardar" icon="get_app" @click="sumaContador()"/>
+   <q-btn push color="white" text-color="primary" label="guardar" icon="get_app" @click="guardaFact()"/>
   </div>
 </template>
 <script>
@@ -17,7 +18,9 @@ export default {
     return {
       fotoGato: require('../assets/634.jpg'),
       info: [],
-      contador: 0
+      contador: 0,
+      facts: [],
+      fact: ''
     }
   },
   mounted: function () {

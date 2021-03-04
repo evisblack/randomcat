@@ -1,8 +1,8 @@
 {
-  "name": "randomcat",
+  "name": "catfacts",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "Hechos increibles sobre gatos",
+  "productName": "Cat Facts",
   "author": "Eva Díaz <evadiazes@yahoo.es>",
   "private": true,
   "scripts": {
