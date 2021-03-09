@@ -36,8 +36,8 @@ export default {
       showSimulatedReturnData: false
     }
   },
-  //cuando la página está montada llama a la funcion que obtiene las frases de los gatos
-  //y simula la carga esperando 3 segundos
+  // cuando la página está montada llama a la funcion que obtiene las frases de los gatos
+  // y simula la carga esperando 3 segundos
   mounted: function () {
     this.getCatFact()
     this.showSimulatedReturnData = false
@@ -47,15 +47,15 @@ export default {
     }, 3000)
   },
   methods: {
-    //llama a la api y almacena la respuesta en un array
+    // llama a la api y almacena la respuesta en un array
     getCatFact: function () {
       api.get('/facts')
         .then((response) => {
           this.info = response.data
         })
     },
-    //función que añade 1 a contador para recorrer de una en una 
-    //las frases que hemos obtenido de la api
+    // función que añade 1 a contador para recorrer de una en una
+    // las frases que hemos obtenido de la api
     sumaContador: function () {
       if (this.contador < (this.info.length - 1)) {
         this.contador++
@@ -63,9 +63,9 @@ export default {
         this.contador = 0
       }
     },
-    //esta función todavia no funciona
-    //la idea es que coja las frases y las alamacene por separado en otro array
-    //que luego mostraremos en otra página y guardaremos en localStorage
+    // esta función todavia no funciona
+    // la idea es que coja las frases y las alamacene por separado en otro array
+    // que luego mostraremos en otra página y guardaremos en localStorage
     guardaFact: function () {
       this.facts.push(
         this.fact
