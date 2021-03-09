@@ -1,13 +1,19 @@
 <template>
   <div class="q-pa-md row items-start q-gutter-md">
-   <q-card class="my-card" v-for="(texto, indice) in info" :key="texto">
-        <q-card-section class="q-pt-none" v-if="indice == contador" v-model="fact" >
+    <q-inner-loading :showing="visible">
+      <q-spinner-gears size="100px" color="primary" />
+    </q-inner-loading>
+   <q-card class="my-card" v-for="(texto, indice) in info" :key="texto.text" v-show="showSimulatedReturnData">
+        <q-card-section class="q-pt-none" v-if="indice == contador">
           {{texto.text}}
         </q-card-section>
+        <q-inner-loading :showing="visible">
+          <q-spinner-gears size="50px" color="primary" />
+        </q-inner-loading>
    </q-card>
-   <p>{{fact}}</p>
    <q-btn push color="primary" label="Nuevo" icon="autorenew" @click="sumaContador()"/>
    <q-btn push color="white" text-color="primary" label="guardar" icon="get_app" @click="guardaFact()"/>
+   <p>{{fact}}</p>
   </div>
 </template>
 <script>
@@ -20,11 +26,18 @@ export default {
       info: [],
       contador: 0,
       facts: [],
-      fact: ''
+      fact: '',
+      visible: true,
+      showSimulatedReturnData: false
     }
   },
   mounted: function () {
     this.getCatFact()
+    this.showSimulatedReturnData = false
+    setTimeout(() => {
+      this.visible = false
+      this.showSimulatedReturnData = true
+    }, 3000)
   },
   methods: {
     getCatFact: function () {
@@ -39,6 +52,11 @@ export default {
       } else {
         this.contador = 0
       }
+    },
+    guardaFact: function () {
+      this.facts.push(
+        this.fact
+      )
     }
   }
 }
