@@ -1,18 +1,18 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
+  <div class="q-pa-md column items-center q-gutter-md">
     <q-inner-loading :showing="visible">
       <q-spinner-gears size="100px" color="primary" />
     </q-inner-loading>
-   <q-card class="my-card" v-for="(texto, indice) in info" :key="texto.text" v-show="showSimulatedReturnData">
-        <q-card-section class="q-pt-none" v-if="indice == contador">
+   <q-card class="my-card q-pa-md" v-show="showSimulatedReturnData" style="max-width: 300px">
+     <q-img :src="fotoGato" style="height: 170px; max-width: 300px"></q-img>
+     <div v-for="(texto, indice) in info" :key="texto.text">
+        <q-card-section class="q-mt-md" v-if="indice == contador">
           {{texto.text}}
         </q-card-section>
-        <q-inner-loading :showing="visible">
-          <q-spinner-gears size="50px" color="primary" />
-        </q-inner-loading>
+      </div>
+      <q-btn push color="primary" label="Nuevo" icon="autorenew" @click="sumaContador()"/>
+      <q-btn push color="white" class="q-ml-sm" text-color="primary" label="guardar" icon="get_app" @click="guardaFact()"/>
    </q-card>
-   <q-btn push color="primary" label="Nuevo" icon="autorenew" @click="sumaContador()"/>
-   <q-btn push color="white" text-color="primary" label="guardar" icon="get_app" @click="guardaFact()"/>
    <p>{{fact}}</p>
   </div>
 </template>
