@@ -23,6 +23,8 @@
 </template>
 <script>
 import { api } from 'boot/axios'
+// import { LocalStorage, SessionStorage } from 'quasar'
+
 export default {
   name: 'PageIndex',
   data: function () {
