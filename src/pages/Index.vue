@@ -62,15 +62,15 @@ export default {
       } else {
         this.contador = 0
       }
-    },
+    }
     // esta función todavia no funciona
     // la idea es que coja las frases y las alamacene por separado en otro array
     // que luego mostraremos en otra página y guardaremos en localStorage
-    guardaFact: function () {
-      this.facts.push(
-        this.fact
-      )
-    }
+    // guardaFact: function () {
+    //  this.facts.push(
+    //    { fact:  }
+    //  )
+    // }
   }
 }
 </script>
