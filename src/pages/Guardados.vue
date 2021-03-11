@@ -2,7 +2,7 @@
   <q-page padding>
     <div class="text-h5">Tus Descargas</div>
     <div v-for="fact in facts">
-      <p>{{fact}} <q-btn class="glossy" round color="negative" icon="highlight_off" /></p>
+      <p>{{fact}} <q-btn class="glossy" round color="negative" icon="highlight_off" @click="eliminaFrase(fact)"/></p>
       
     </div>
   </q-page>
@@ -16,8 +16,24 @@ export default {
       facts: []
     }
   },
+  methods: {
+      eliminaFrase: function (fact) {
+      // Busca el indice de la frase y la elimina del array de tareas
+      const indice = this.facts.indexOf(fact);
+
+      this.facts.splice(indice, 1);
+    }
+  },
   created: function () {
     if (localStorage.getItem('facts')) { this.facts = JSON.parse(localStorage.getItem('facts')); }
+  },
+  watch: {
+    facts: {
+      handler () {
+        localStorage.setItem('facts', JSON.stringify(this.facts));
+      },
+      deep: true
+    }
   }
 }
 </script>

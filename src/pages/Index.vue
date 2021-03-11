@@ -18,8 +18,6 @@
         </div>
       </div>  
    </q-card>
-   <!--Para hacer pruebas-->
-   <p v-for="fact in facts">{{fact}}</p>
   </div>
 </template>
 <script>
