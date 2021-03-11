@@ -70,6 +70,17 @@ export default {
     guardaFact: function (fact) {
       this.facts.push(fact)
     }
+  },
+  created: function () {
+    if (localStorage.getItem('facts')) { this.facts = JSON.parse(localStorage.getItem('facts')); }
+  },
+  watch: {
+    facts: {
+      handler () {
+        localStorage.setItem('facts', JSON.stringify(this.facts));
+      },
+      deep: true
+    }
   }
 }
 </script>
