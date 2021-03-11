@@ -12,13 +12,14 @@
         <q-card-section class="q-mt-md" v-if="indice == contador">
           {{texto.text}}
         </q-card-section>
-      </div>
-      <q-btn push color="primary" label="Nuevo" icon="autorenew" @click="sumaContador()"/>
-      <!--Este botón de momento no funciona-->
-      <q-btn push color="white" class="q-ml-sm" text-color="primary" label="guardar" icon="get_app" @click="guardaFact()"/>
+        <div v-if="indice == contador">
+        <q-btn push color="white" text-color="primary" label="guardar" icon="get_app" @click="guardaFact(texto.text)"/>
+        <q-btn push color="primary" class="q-ml-sm" label="Nuevo" icon="autorenew" @click="sumaContador()"/>  
+        </div>
+      </div>  
    </q-card>
    <!--Para hacer pruebas-->
-   <p>{{fact}}</p>
+   <p v-for="fact in facts">{{fact}}</p>
   </div>
 </template>
 <script>
@@ -33,7 +34,6 @@ export default {
       info: [],
       contador: 0,
       facts: [],
-      fact: '',
       visible: true,
       showSimulatedReturnData: false
     }
@@ -49,7 +49,7 @@ export default {
     }, 3000)
   },
   methods: {
-    // llama a la api y almacena la respuesta en un array
+    // llama a la api y almacena la respuesta en un array llamado info
     getCatFact: function () {
       api.get('/facts')
         .then((response) => {
@@ -64,15 +64,12 @@ export default {
       } else {
         this.contador = 0
       }
-    }
-    // esta función todavia no funciona
-    // la idea es que coja las frases y las alamacene por separado en otro array
+    },
+    // coge las frases y las alamacena por separado en otro array
     // que luego mostraremos en otra página y guardaremos en localStorage
-    // guardaFact: function () {
-    //  this.facts.push(
-    //    { fact:  }
-    //  )
-    // }
+    guardaFact: function (fact) {
+      this.facts.push(fact)
+    }
   }
 }
 </script>
