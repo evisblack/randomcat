@@ -13,6 +13,7 @@
           {{texto.text}}
         </q-card-section>
         <div v-if="indice == contador">
+          <!--Botón que llama a la función que guarda la frase que está en pantalla, la cual pasamos como parámetro-->
         <q-btn push color="white" text-color="primary" label="guardar" icon="get_app" @click="guardaFact(texto.text)"/>
         <q-btn push color="primary" class="q-ml-sm" label="Nuevo" icon="autorenew" @click="sumaContador()"/>  
         </div>
@@ -21,9 +22,8 @@
   </div>
 </template>
 <script>
+// importamos api del archivo axios que hemos creado para poder usarlo
 import { api } from 'boot/axios'
-// import { LocalStorage, SessionStorage } from 'quasar'
-
 export default {
   name: 'PageIndex',
   data: function () {
@@ -69,15 +69,16 @@ export default {
       this.facts.push(fact)
     }
   },
+  //cuando se crea la página cargamos los datos que esten guardados en localStorage
   created: function () {
     if (localStorage.getItem('facts')) { this.facts = JSON.parse(localStorage.getItem('facts')); }
   },
+  //creamos un watcher que este pendiente de los cambios en el array facts y lo actualice
   watch: {
     facts: {
       handler () {
         localStorage.setItem('facts', JSON.stringify(this.facts));
-      },
-      deep: true
+      }
     }
   }
 }
