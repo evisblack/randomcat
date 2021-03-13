@@ -33,7 +33,8 @@ export default {
       contador: 0,
       facts: [],
       visible: true,
-      showSimulatedReturnData: false
+      showSimulatedReturnData: false,
+      guardar: true
     }
   },
   // cuando la página está montada llama a la funcion que obtiene las frases de los gatos
@@ -66,7 +67,16 @@ export default {
     // coge las frases y las alamacena por separado en otro array
     // que luego mostraremos en otra página y guardaremos en localStorage
     guardaFact: function (fact) {
-      this.facts.push(fact)
+    // comprueba que la frase no se encuentre ya almacenada en el array
+      for (let i = 0; i < this.facts.length; i++) {
+        if (fact == this.facts[i]) {
+          this.guardar = false;
+          break
+        }
+      }
+      if (this.guardar) {
+        this.facts.push(fact)
+      }  
     }
   },
   //cuando se crea la página cargamos los datos que esten guardados en localStorage
